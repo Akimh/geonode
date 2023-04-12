@@ -446,6 +446,8 @@ class ResourceBaseSerializer(
         self.fields['pk'] = serializers.CharField(read_only=True)
         self.fields['uuid'] = serializers.CharField(read_only=True)
         self.fields['resource_type'] = serializers.CharField(required=False)
+        self.fields['custom_md'] = serializers.CharField()
+        self.fields['raw_custom_md'] = serializers.CharField(read_only=True)
         self.fields['polymorphic_ctype_id'] = serializers.CharField(read_only=True)
         self.fields['owner'] = DynamicRelationField(UserSerializer, embed=True, many=False, read_only=True, required=False)
         self.fields['poc'] = ContactRoleField('poc', read_only=True)
@@ -488,7 +490,7 @@ class ResourceBaseSerializer(
         self.fields['processed'] = serializers.BooleanField(read_only=True)
         self.fields['state'] = serializers.CharField(read_only=True)
         self.fields['sourcetype'] = serializers.CharField(read_only=True)
-
+        self.fields['custom_md'] = serializers.CharField()
         self.fields['embed_url'] = EmbedUrlField(required=False)
         self.fields['thumbnail_url'] = ThumbnailUrlField(read_only=True)
         self.fields['keywords'] = DynamicRelationField(
@@ -532,7 +534,7 @@ class ResourceBaseSerializer(
             'raw_abstract', 'raw_purpose', 'raw_constraints_other',
             'raw_supplemental_information', 'raw_data_quality_statement', 'metadata_only', 'processed', 'state',
             'data', 'subtype', 'sourcetype', 'is_copyable',
-            'blob', "metadata", 'executions'
+            'blob', "metadata", 'executions', 'blob', 'custom_md','raw_custom_md'
             # TODO
             # csw_typename, csw_schema, csw_mdsource, csw_insert_date, csw_type, csw_anytext, csw_wkt_geometry,
             # metadata_uploaded, metadata_uploaded_preserve, metadata_xml,
